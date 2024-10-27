@@ -16,6 +16,7 @@ const endTimeDisplay = document.getElementById('endTime');
 const volumeControl = document.getElementById('volumeControl');
 
 let currentSongIndex = 0;
+
 const songs = [
   {
     title: 'Toda Lecha Rebbe',
@@ -30,7 +31,7 @@ const songs = [
   {
     title: 'L\'chai_Olamim',
     src: './songs/Matt_Dubb_Feat._Mordchai_Shapiro___Benny_Friedman_-_L\'chai_Olamim_(Single).mp3',
-    image: './images/lechai-olamim.webp'
+    image: './images/lechai-olamim.webp' 
   },
   {
     title: 'Yesh Bi Emunah',
@@ -49,6 +50,12 @@ audio.addEventListener('loadedmetadata', () => {
   const endTime = formatTime(audio.duration);
   endTimeDisplay.textContent = endTime;
 });
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
 
 function togglePlayPause() {
   if (audio.paused) {
@@ -94,12 +101,6 @@ function updateProgressBar() {
 
   const startTime = formatTime(audio.currentTime);
   startTimeDisplay.textContent = startTime;
-}
-
-function formatTime(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = Math.floor(time % 60);
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
 function setProgressBar(event) {
